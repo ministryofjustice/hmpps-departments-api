@@ -13,3 +13,23 @@ springdoc:
     enabled: true
   swagger-ui:
     enabled: true
+
+spring:
+  application:
+    name: hmpps-departments-api
+  main:
+    allow-bean-definition-overriding: true  # Required for test mocking
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  datasource:
+    username: sa
+    password: password
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
+    driver-class-name: org.h2.Driver
+  flyway:
+    enabled: false
