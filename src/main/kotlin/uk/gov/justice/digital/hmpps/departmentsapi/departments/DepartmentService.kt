@@ -11,7 +11,6 @@ class DepartmentService(private val repository: DepartmentRepository) {
 }
 
 private fun DepartmentModel.toDto() = DepartmentResponse(
-  id = id,
   name = name,
   slug = slug,
 )

@@ -39,7 +39,6 @@ class DepartmentTest : IntegrationTestBase() {
       .expectStatus().isOk
       .expectBody()
       .jsonPath("$.length()").isEqualTo(1)
-      .jsonPath("$[0].id").isEqualTo(activeDepartment.id.toString())
       .jsonPath("$[0].name").isEqualTo("Safer Custody")
       .jsonPath("$[0].slug").isEqualTo("safer-custody")
   }
