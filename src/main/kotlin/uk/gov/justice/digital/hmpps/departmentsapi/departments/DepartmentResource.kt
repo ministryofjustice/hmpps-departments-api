@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.departmentsapi.resource
+package uk.gov.justice.digital.hmpps.departmentsapi.departments
 
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.ArraySchema
@@ -13,13 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import uk.gov.justice.digital.hmpps.departmentsapi.dto.response.EstablishmentDepartmentResponseDto
-import uk.gov.justice.digital.hmpps.departmentsapi.service.EstablishmentDepartmentService
 import uk.gov.justice.hmpps.kotlin.common.ErrorResponse
 
 @RestController
-@RequestMapping("/establishments", produces = [MediaType.APPLICATION_JSON_VALUE])
-class EstablishmentDepartmentResource(private val service: EstablishmentDepartmentService) {
+@RequestMapping("/departments", produces = [MediaType.APPLICATION_JSON_VALUE])
+class DepartmentResource(private val service: DepartmentService) {
 
   @Tag(name = "Establishment departments")
   @Operation(
@@ -33,7 +31,7 @@ class EstablishmentDepartmentResource(private val service: EstablishmentDepartme
         content = [
           Content(
             mediaType = MediaType.APPLICATION_JSON_VALUE,
-            array = ArraySchema(schema = Schema(implementation = EstablishmentDepartmentResponseDto::class)),
+            array = ArraySchema(schema = Schema(implementation = DepartmentResponse::class)),
           ),
         ],
       ),
@@ -49,9 +47,9 @@ class EstablishmentDepartmentResource(private val service: EstablishmentDepartme
       ),
     ],
   )
-  @GetMapping("/{establishmentId}/departments")
+  @GetMapping("/activeAt/{establishmentCode}")
   @PreAuthorize("hasAnyAuthority('ROLE_DEPARTMENTS__DEPARTMENTS_RW', 'ROLE_DEPARTMENTS__DEPARTMENTS_RO')")
   fun getActiveDepartments(
-    @PathVariable("establishmentId") establishmentId: String,
-  ): List<EstablishmentDepartmentResponseDto> = service.getActiveDepartments(establishmentId)
+    @PathVariable("establishmentCode") establishmentCode: String,
+  ): List<DepartmentResponse> = service.getActiveDepartments(establishmentCode)
 }

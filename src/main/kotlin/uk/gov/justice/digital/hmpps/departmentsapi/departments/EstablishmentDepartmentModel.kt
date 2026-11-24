@@ -1,4 +1,4 @@
-package uk.gov.justice.digital.hmpps.departmentsapi.model
+package uk.gov.justice.digital.hmpps.departmentsapi.departments
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -8,7 +8,7 @@ import java.util.UUID
 
 @Entity
 @Table(name = "establishment_departments")
-data class EstablishmentDepartment(
+data class EstablishmentDepartmentModel(
   @Id
   @Column(name = "id")
   val id: UUID,
